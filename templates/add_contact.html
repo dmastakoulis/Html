@@ -1,0 +1,42 @@
+{% extends 'base_employee.html' if session.role == 'employee' else 'base_manager.html' %}
+
+{% block title %}- Add Contact{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="mb-4">
+                    <i class="bi bi-plus-circle"></i> Add Contact for {{ customer.name }}
+                </h2>
+                
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Contact Notes *</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="5" 
+                                  placeholder="Describe the interaction..." required></textarea>
+                        <small class="text-muted">Include details about what was discussed, outcomes, next steps, etc.</small>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="no_response" name="no_response" value="1">
+                        <label class="form-check-label" for="no_response">
+                            Customer did not respond
+                        </label>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="/customers/{{ customer.id }}/contacts" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Save Contact
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    <li class="nav-item">
+        <a class="nav-link" href="/manager/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/customers"><i class="bi bi-people"></i> Customers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/manager/employee_stats"><i class="bi bi-bar-chart"></i> Employee Stats</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-file-earmark-bar-graph"></i> Reports
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/manager/inactive_customers">Inactive Customers</a></li>
+            <li><a class="dropdown-item" href="/manager/no_response_customers">No Response Customers</a></li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </li>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base_manager.html' %}
+
+{% block title %}- No Response Customers{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="bi bi-x-circle"></i> No Response Customers</h1>
+    <a href="/manager/dashboard" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-auto">
+                <label for="attempts" class="form-label">Minimum attempts without response:</label>
+            </div>
+            <div class="col-auto">
+                <select class="form-select" id="attempts" name="attempts" onchange="this.form.submit()">
+                    <option value="2" {% if attempts == '2' %}selected{% endif %}>2</option>
+                    <option value="3" {% if attempts == '3' %}selected{% endif %}>3</option>
+                    <option value="5" {% if attempts == '5' %}selected{% endif %}>5</option>
+                    <option value="10" {% if attempts == '10' %}selected{% endif %}>10</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if customers %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Customers with {{ attempts }}+ no-response attempts ({{ customers|length }} found)</h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Company</th>
+                        <th>Employee</th>
+                        <th class="text-center">No-Response Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.email or '-' }}</td>
+                        <td>{{ customer.phone or '-' }}</td>
+                        <td>{{ customer.company or '-' }}</td>
+                        <td>{{ customer.employee_name }}</td>
+                        <td class="text-center">
+                            <span class="badge bg-danger">{{ customer.no_response_count }}</span>
+                        </td>
+                        <td>
+                            <a href="/customers/{{ customer.id }}/contacts" class="btn btn-sm btn-info">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-success">
+    <i class="bi bi-check-circle"></i> No customers found with {{ attempts }}+ no-response attempts.
+</div>
+{% endif %}
+{% endblock %}

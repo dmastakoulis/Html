@@ -1,0 +1,77 @@
+{% extends 'base_employee.html' if session.role == 'employee' else 'base_manager.html' %}
+
+{% block title %}- Customers{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="bi bi-people"></i> Customers</h1>
+    <a href="/customers/add" class="btn btn-primary">
+        <i class="bi bi-person-plus-fill"></i> Add Customer
+    </a>
+</div>
+
+{% if customers %}
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Company</th>
+                        <th>Category</th>
+                        {% if session.role == 'manager' %}
+                        <th>Employee</th>
+                        {% endif %}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.email or '-' }}</td>
+                        <td>{{ customer.phone or '-' }}</td>
+                        <td>{{ customer.company or '-' }}</td>
+                        <td>
+                            <span class="badge bg-{% if customer.category == 'Lead' %}warning{% elif customer.category == 'Active' %}success{% elif customer.category == 'Inactive' %}secondary{% else %}danger{% endif %}">
+                                {{ customer.category }}
+                            </span>
+                        </td>
+                        {% if session.role == 'manager' %}
+                        <td>{{ customer.employee_name or '-' }}</td>
+                        {% endif %}
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="/customers/{{ customer.id }}/contacts" class="btn btn-info" title="View Contacts">
+                                    <i class="bi bi-chat-dots"></i>
+                                </a>
+                                <a href="/customers/{{ customer.id }}/add_contact" class="btn btn-success" title="Add Contact">
+                                    <i class="bi bi-plus-circle"></i>
+                                </a>
+                                <a href="/customers/edit/{{ customer.id }}" class="btn btn-warning" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="/customers/delete/{{ customer.id }}" 
+                                   class="btn btn-danger" 
+                                   onclick="return confirm('Are you sure you want to deactivate this customer?')"
+                                   title="Deactivate">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">
+    <i class="bi bi-info-circle"></i> No customers found. <a href="/customers/add">Add your first customer</a>
+</div>
+{% endif %}
+{% endblock %}
