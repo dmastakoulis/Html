@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = 'x8s7df68s7d6f87s6d8f7s6d' # Random key for security
+app.secret_key = 'Dimitris' # Random key for security
 
 DB_NAME = 'database/crm.db'
 
