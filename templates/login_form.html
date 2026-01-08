@@ -1,0 +1,41 @@
+{% extends 'base_guest.html' %}
+
+{% block title %}- Login{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div style="width: 100%; max-width: 400px;">
+        
+        <div class="bg-light mx-auto d-flex align-items-center justify-content-center mb-5" 
+             style="width: 140px; height: 60px; border-radius: 8px; font-weight: 900; font-size: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            CRM
+        </div>
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="text-white small ms-1 mb-1 fw-bold">Email</label>
+                <input type="text" name="username" class="form-control" placeholder="Type" required
+                       style="background-color: #E0F7FA; border: none; height: 50px; border-radius: 8px; font-weight: 600;">
+            </div>
+            
+            <div class="mb-3">
+                <label class="text-white small ms-1 mb-1 fw-bold">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Type" required
+                       style="background-color: #E0F7FA; border: none; height: 50px; border-radius: 8px; font-weight: 600;">
+            </div>
+            
+            <div class="d-flex justify-content-between text-white small mb-5 px-1">
+                <div>
+                    <input type="checkbox" name="remember" id="rem" class="form-check-input" style="background-color: #E0F7FA; border: none;"> 
+                    <label for="rem">Remember me</label>
+                </div>
+                <a href="#" class="text-white" style="text-decoration: none;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-figma w-100">
+                LOGIN
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

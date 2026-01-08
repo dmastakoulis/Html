@@ -1,0 +1,60 @@
+{% extends 'base_admin.html' %}
+{% block content %}
+
+<div class="manager-btn-container">
+    
+    <div class="manager-header-btn" style="cursor: default;">
+        <h2>Dashboard</h2>
+    </div>
+    
+    <div class="manager-header-btn btn-spacer" style="cursor: default;">
+        <h2>View Users</h2>
+    </div>
+
+    <div class="search-wrapper">
+        <div class="search-container">
+            <input type="text" placeholder="🔍 Search">
+        </div>
+    </div>
+
+    <div class="admin-table-sleek">
+        
+        <div class="dash-row">
+            <div class="dash-col dash-header">Full name</div>
+            <div class="dash-col dash-header">Role</div>
+            <div class="dash-col dash-header">Email</div>
+            <div class="dash-col dash-header" style="border-right: none;">Status</div>
+        </div>
+
+        <div class="dash-row">
+            <div class="dash-col">Paul Kellerman</div>
+            <div class="dash-col">Employee</div>
+            <div class="dash-col" style="font-size: 0.9rem;">pkellerman@gmali.com</div>
+            <div class="dash-col" style="border-right: none;">Active</div>
+        </div>
+
+        <div class="dash-row">
+            <div class="dash-col">Lip Gallagher</div>
+            <div class="dash-col">Manager</div>
+            <div class="dash-col" style="font-size: 0.9rem;">lipgallagher@gmail.com</div>
+            <div class="dash-col" style="border-right: none;">Inactive</div>
+        </div>
+
+        <div class="dash-row">
+            <div class="dash-col">Lizzie Stark</div>
+            <div class="dash-col">Admin</div>
+            <div class="dash-col" style="font-size: 0.9rem;">lizziestrk@outlook.com</div>
+            <div class="dash-col" style="border-right: none;">Active</div>
+        </div>
+
+        <div class="dash-row">
+            <div class="dash-col">Jordan Carter</div>
+            <div class="dash-col">Employee</div>
+            <div class="dash-col" style="font-size: 0.9rem;">jcarter@gmail.com</div>
+            <div class="dash-col" style="border-right: none;">Inactive</div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

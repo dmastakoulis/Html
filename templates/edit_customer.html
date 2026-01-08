@@ -1,0 +1,61 @@
+{% extends 'base_employee.html' if session.role == 'employee' else 'base_manager.html' %}
+
+{% block title %}- Edit Customer{% endblock %}
+
+{% block content %}
+
+<div class="page-header-box">
+    <h2>Edit Customer</h2>
+</div>
+
+<div class="custom-form-container">
+    <form method="POST">
+        
+        <div class="form-row">
+            <div class="form-label">Name</div>
+            <div class="form-input">
+                <input type="text" name="name" value="{{ customer.name }}" class="input-standard" placeholder="Type" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Phone</div>
+            <div class="form-input">
+                <input type="text" name="phone" value="{{ customer.phone or '' }}" class="input-standard" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Email</div>
+            <div class="form-input">
+                <input type="email" name="email" value="{{ customer.email or '' }}" class="input-standard" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Company</div>
+            <div class="form-input">
+                <input type="text" name="company" value="{{ customer.company or '' }}" class="input-standard" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Category</div>
+            <div class="form-input">
+                <select name="category" class="select-standard" required>
+                    <option value="Lead" {% if customer.category == 'Lead' %}selected{% endif %}>Lead</option>
+                    <option value="Active" {% if customer.category == 'Active' %}selected{% endif %}>Active</option>
+                    <option value="Inactive" {% if customer.category == 'Inactive' %}selected{% endif %}>Inactive</option>
+                    <option value="Cancelled" {% if customer.category == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="btn-container-center">
+            <a href="/customers" style="margin-right: 20px; text-decoration: none; color: #666;">Cancel</a>
+            <button type="submit" class="btn-figma">Update</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

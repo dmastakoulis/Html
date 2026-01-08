@@ -1,0 +1,33 @@
+{% extends 'base_admin.html' %}
+{% block content %}
+
+<div class="page-header-box">
+    <h2>Update User</h2>
+</div>
+
+<div class="search-wrapper">
+    <div class="search-container">
+        <input type="text" placeholder="🔍 Search">
+    </div>
+</div>
+
+<div class="custom-form-container delete-container-box">
+    <div class="delete-header-row">
+        <span>Full Name</span>
+        <span class="delete-checkbox-wrapper" style="width: 80px;">Select</span>
+    </div>
+
+    {% for user in users %}
+    <div class="delete-item-row">
+        <span style="font-weight: 500;">{{ user.username }} ({{ user.role }})</span>
+        <div class="delete-checkbox-wrapper" style="width: 80px;">
+            <a href="{{ url_for('edit_user', id=user.id) }}" 
+               style="font-weight: bold; text-decoration: underline; color: black;">
+               Select
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

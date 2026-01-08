@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh;">
+    
+    <div style="background-color: white; border: 1px solid black; border-radius: 6px; padding: 12px 50px; margin-bottom: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h2 style="margin: 0; font-weight: 800; font-size: 1.5rem; text-transform: uppercase;">Register</h2>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" style="width: 100%; max-width: 320px; text-align: center; margin-bottom: 20px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" style="width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 15px;">
+        
+        <div>
+            <label style="display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">Username</label>
+            <input type="text" name="username" required 
+                   style="width: 100%; padding: 12px; border-radius: 6px; border: none; background-color: var(--brand-accent); text-align: center; font-weight: 500; outline: none;">
+        </div>
+
+        <div>
+            <label style="display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">Password</label>
+            <input type="password" name="password" required 
+                   style="width: 100%; padding: 12px; border-radius: 6px; border: none; background-color: var(--brand-accent); text-align: center; font-weight: 500; outline: none;">
+        </div>
+
+        <div>
+            <label style="display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">Confirm Password</label>
+            <input type="password" name="password2" required 
+                   style="width: 100%; padding: 12px; border-radius: 6px; border: none; background-color: var(--brand-accent); text-align: center; font-weight: 500; outline: none;">
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn-figma" style="width: 100%; text-transform: uppercase;">Register</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="{{ url_for('login') }}" style="font-size: 0.9rem; font-weight: 500; text-decoration: underline;">
+                Already have an account? Login here
+            </a>
+        </div>
+
+    </form>
+
+</div>
+{% endblock %}

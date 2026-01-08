@@ -1,0 +1,66 @@
+{% extends 'base_manager.html' %}
+{% block title %}- No Response Clients{% endblock %}
+
+{% block content %}
+
+<div class="page-header-box">
+    <h2>No Response Customers</h2>
+</div>
+
+<div class="container mb-4" style="max-width: 450px;">
+    <form method="get">
+        <div class="custom-form-container" style="padding: 10px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-weight: 500; color: #666;">Minimum Attempts:</span>
+            <select name="attempts" class="select-standard" style="width: 100px;" onchange="this.form.submit()">
+                <option value="2" {% if attempts == '2' %}selected{% endif %}>2</option>
+                <option value="3" {% if attempts == '3' %}selected{% endif %}>3</option>
+                <option value="5" {% if attempts == '5' %}selected{% endif %}>5</option>
+                <option value="10" {% if attempts == '10' %}selected{% endif %}>10</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+{% if customers %}
+    {% for customer in customers %}
+    <div class="vc-card">
+        <div class="vc-header-row">
+            <div class="vc-header-col">CLIENT INFO</div>
+            <div class="vc-header-col">BUSINESS DETAILS</div>
+            <div class="vc-header-col">NO RESPONSE COUNT</div>
+        </div>
+
+        <div class="vc-body-row">
+            <div class="vc-body-col">
+                <div class="vc-data-item"><label>Name</label><span>{{ customer.name }}</span></div>
+                <div class="vc-data-item"><label>Phone</label><span>{{ customer.phone }}</span></div>
+                <div class="vc-data-item"><label>Email</label><span>{{ customer.email }}</span></div>
+            </div>
+
+            <div class="vc-body-col">
+                <div class="vc-data-item"><label>Company</label><span>{{ customer.company }}</span></div>
+                <div class="vc-data-item"><label>Assigned Rep</label><span>{{ customer.employee_name }}</span></div>
+                <div class="vc-data-item"><label>Last Attempt</label><span>{{ customer.last_contact or 'Unknown' }}</span></div>
+            </div>
+
+            <div class="vc-body-col" style="align-items: center; justify-content: center; flex-direction: column;">
+                <div style="font-size: 2.5rem; font-weight: 900; color: #dc3545; line-height: 1;">
+                    {{ customer.no_response_count }}
+                </div>
+                <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 10px;">Failed Attempts</span>
+                
+                <a href="/customers/{{ customer.id }}/contacts" class="btn-figma" style="font-size: 0.8rem; padding: 5px 15px;">
+                    View History
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% else %}
+    <div class="text-center mt-5">
+        <p style="color: #888;">No customers found with {{ attempts }} or more failed attempts.</p>
+    </div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base_manager.html' %}
+{% block title %}- Inactive Clients{% endblock %}
+
+{% block content %}
+
+<div class="page-header-box">
+    <h2>Inactive Customers</h2>
+</div>
+
+<div class="container mb-4" style="max-width: 400px;">
+    <form method="get">
+        <div class="custom-form-container" style="padding: 10px 20px; display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-weight: 500; color: #666;">No contact since:</span>
+            <select name="days" class="select-standard" style="width: 150px;" onchange="this.form.submit()">
+                <option value="7" {% if days == '7' %}selected{% endif %}>7 Days</option>
+                <option value="14" {% if days == '14' %}selected{% endif %}>14 Days</option>
+                <option value="30" {% if days == '30' %}selected{% endif %}>30 Days</option>
+                <option value="60" {% if days == '60' %}selected{% endif %}>60 Days</option>
+                <option value="90" {% if days == '90' %}selected{% endif %}>90 Days</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+{% if customers %}
+    {% for customer in customers %}
+    <div class="vc-card">
+        <div class="vc-header-row">
+            <div class="vc-header-col">CLIENT DETAILS</div>
+            <div class="vc-header-col">STATUS</div>
+            <div class="vc-header-col">ACTION</div>
+        </div>
+
+        <div class="vc-body-row">
+            <div class="vc-body-col">
+                <div class="vc-data-item"><label>Name</label><span>{{ customer.name }}</span></div>
+                <div class="vc-data-item"><label>Phone</label><span>{{ customer.phone }}</span></div>
+                <div class="vc-data-item"><label>Email</label><span>{{ customer.email }}</span></div>
+            </div>
+
+            <div class="vc-body-col">
+                <div class="vc-data-item"><label>Category</label><span>{{ customer.category }}</span></div>
+                <div class="vc-data-item"><label>Assigned To</label><span>{{ customer.employee_name }}</span></div>
+                <div class="vc-data-item">
+                    <label>Last Contact</label>
+                    <span style="color: #e63946; font-weight: bold;">
+                        {{ customer.last_contact or 'Never' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="vc-body-col" style="justify-content: center; align-items: center;">
+                <a href="/customers/{{ customer.id }}/contacts" class="btn-figma" style="text-decoration: none; font-size: 0.9rem;">
+                    Log Contact
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% else %}
+    <div class="text-center mt-5">
+        <p style="color: #888;">No inactive customers found for this period.</p>
+    </div>
+{% endif %}
+
+{% endblock %}

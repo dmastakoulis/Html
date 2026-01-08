@@ -1,0 +1,116 @@
+{% extends 'base_employee.html' %}
+{% block content %}
+
+<div class="page-header-box">
+    <h2>New Customer Update</h2>
+    <p class="text-muted">Log a new interaction or update for a client.</p>
+</div>
+
+<div class="custom-form-container">
+    <form method="POST" id="updateForm">
+        
+        <div class="form-row">
+            <label class="form-label" for="customer_select">Client Name</label>
+            <div class="form-input">
+                {% if customer %}
+                    <input type="text" value="{{ customer.name }}" readonly class="input-readonly">
+                    <input type="hidden" name="customer_id" value="{{ customer.id }}">
+                {% else %}
+                    <select name="customer_id" id="customer_select" required class="select-standard" style="width: 100%;">
+                        <option value="" disabled selected>Select a client...</option>
+                        {% for c in customers %}
+                            <option value="{{ c.id }}" 
+                                    data-phone="{{ c.phone }}" 
+                                    data-email="{{ c.email }}">
+                                {{ c.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="form-label">Contact Details</label>
+            <div class="form-input split-input">
+                <input type="text" 
+                       id="client_phone" 
+                       value="{{ customer.phone if customer else '' }}" 
+                       placeholder="Phone Number" 
+                       readonly 
+                       class="input-readonly" 
+                       title="Phone Number">
+                
+                <input type="text" 
+                       id="client_email" 
+                       value="{{ customer.email if customer else '' }}" 
+                       placeholder="Email Address" 
+                       readonly 
+                       class="input-readonly" 
+                       title="Email Address">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="form-label" for="contact_date">Interaction Details</label>
+            <div class="form-input split-input">
+                <input type="date" 
+                       name="contact_date" 
+                       id="contact_date" 
+                       class="input-standard" 
+                       required>
+                
+                <input type="text" 
+                       value="{{ session['username'] }}" 
+                       readonly 
+                       class="input-readonly" 
+                       title="Representative">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="form-label" for="notes">Key Topics & Notes</label>
+            <div class="form-input">
+                <textarea name="notes" 
+                          id="notes" 
+                          class="input-standard" 
+                          rows="4" 
+                          placeholder="Summarize the conversation or update here..." 
+                          required></textarea>
+            </div>
+        </div>
+
+        <div class="btn-container-center">
+            <button type="submit" class="btn-figma">Confirm Update</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectBox = document.getElementById('customer_select');
+        const phoneInput = document.getElementById('client_phone');
+        const emailInput = document.getElementById('client_email');
+
+        
+        if (selectBox) {
+            selectBox.addEventListener('change', function() {
+                
+                const selectedOption = this.options[this.selectedIndex];
+                
+                
+                phoneInput.value = selectedOption.getAttribute('data-phone') || '';
+                emailInput.value = selectedOption.getAttribute('data-email') || '';
+            });
+        }
+        
+        
+        const dateInput = document.getElementById('contact_date');
+        if (!dateInput.value) {
+            dateInput.valueAsDate = new Date();
+        }
+    });
+</script>
+
+{% endblock %}

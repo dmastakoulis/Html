@@ -1,0 +1,58 @@
+{% extends 'base_employee.html' %}
+{% block content %}
+
+<div class="page-header-box">
+    <h2>Add New Customer</h2>
+</div>
+
+<div class="custom-form-container">
+    <form action="/customers/add" method="POST">
+        <div class="form-row">
+            <div class="form-label">Name</div>
+            <div class="form-input">
+                <input type="text" name="name" placeholder="Type" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Phone</div>
+            <div class="form-input">
+                <input type="text" name="phone" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Email</div>
+            <div class="form-input">
+                <input type="email" name="email" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Date</div>
+            <div class="form-input">
+                <input type="text" name="created_at" placeholder="dd/mm/yyyy">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-label">Profession</div>
+            <div class="form-input">
+                <input type="text" name="profession" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Revenue</div>
+            <div class="form-input">
+                <input type="text" name="revenue" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="text-center mt-4 mb-5">
+            <button class="btn-figma" type="submit">Confirm</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base_admin.html' %}
+{% block content %}
+
+<div class="page-header-box">
+    <h2>Create User</h2>
+</div>
+
+<div class="custom-form-container">
+    <form action="{{ url_for('create_user') }}" method="POST">
+        
+        <div class="form-row">
+            <div class="form-label">Name</div>
+            <div class="form-input">
+                <input type="text" name="username" class="input-standard" placeholder="Type" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Phone</div>
+            <div class="form-input">
+                <input type="text" name="phone" class="input-standard" placeholder="Type">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Email</div>
+            <div class="form-input">
+                <input type="email" name="email" class="input-standard" placeholder="Type" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Role</div>
+            <div class="form-input">
+                <select name="role" class="select-standard">
+                    <option value="employee">Employee</option>
+                    <option value="manager">Manager</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Date</div>
+            <div class="form-input">
+                <input type="text" name="created_at" class="input-standard" placeholder="dd/mm/yyyy">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-label">Password</div>
+            <div class="form-input">
+                <input type="password" name="password" class="input-standard" placeholder="Type" required>
+            </div>
+        </div>
+
+        <div class="btn-container-center">
+            <button type="submit" class="btn-figma">Confirm</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

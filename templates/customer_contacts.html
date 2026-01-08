@@ -1,0 +1,61 @@
+{% extends 'base_employee.html' if session.role == 'employee' else 'base_manager.html' %}
+
+{% block title %} - Contacts{% endblock %}
+
+{% block content %}
+<div class="page-header-box">
+    <h2>Contacts: {{ customer.name }}</h2>
+    <div class="sub-header">
+        {{ customer.email }} • {{ customer.phone }}
+    </div>
+</div>
+
+<div class="custom-form-container" style="max-width: 100%;">
+    
+    <div class="mb-4 text-end">
+        <a href="/customers/{{ customer.id }}/add_contact" class="btn-figma">
+            + Add Contact
+        </a>
+    </div>
+
+    <div class="form-row" style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+        <div class="col">
+            <small class="text-muted">Status</small><br>
+            <strong>{{ customer.category }}</strong>
+        </div>
+        <div class="col">
+            <small class="text-muted">Company</small><br>
+            <strong>{{ customer.company }}</strong>
+        </div>
+        <div class="col">
+            <small class="text-muted">Since</small><br>
+            <strong>{{ customer.created_at }}</strong>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    {% if contacts %}
+        <div class="history-list">
+            {% for contact in contacts %}
+                <div class="history-item mb-3 p-3 border-bottom">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">{{ contact.employee_name }}</span>
+                        <span class="text-muted" style="font-size: 0.85rem;">{{ contact.contact_date }}</span>
+                    </div>
+                    <p class="mt-2 mb-0">{{ contact.notes }}</p>
+                    
+                    {% if contact.no_response %}
+                        <span class="badge bg-secondary mt-2">No Answer</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center text-muted py-5">
+            No history found. <a href="/customers/{{ customer.id }}/add_contact">Log the first one?</a>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
