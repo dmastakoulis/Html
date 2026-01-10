@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 2. Delete Confirmation (Fixed for your Checkbox Forms)
+    // We target forms that have "delete" in the action URL
     var deleteForms = document.querySelectorAll('form[action*="delete"]');
     deleteForms.forEach(function(form) {
         form.addEventListener('submit', function(e) {
